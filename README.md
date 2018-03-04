@@ -13,5 +13,5 @@ $ mysql -u root -p < config/initial_db.sql
 
 ### 使い方
 ```
-$ DEBUG=app:* npm start
+$ DEBUG=app:* npm run dev
 ```
