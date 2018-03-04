@@ -11,5 +11,5 @@ $ npm install
 
 ### 使い方
 ```
-$ DEBUG=app:* npm start
+$ DEBUG=app:* npm run dev
 ```
