@@ -12,6 +12,9 @@
     "ejs": "~2.5.6",
     "express": "~4.15.2",
     "morgan": "~1.8.1",
+    "mysql2": "^1.5.2",
+    "sequelize": "^4.35.1",
+    "sequelize-cli": "^4.0.0",
     "serve-favicon": "~2.4.2"
   },
   "engines": {
