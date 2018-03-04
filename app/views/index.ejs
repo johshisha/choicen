@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Welcome to Choicen</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1>質問一覧</h1>
+    <h3><%= question %></h3>
+    <% for (var option of options){ %>
+      <li><%= option.name %></li>
+    <% } %>
   </body>
 </html>
