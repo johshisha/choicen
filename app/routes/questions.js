@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
           question.getOptions().then(associatedOptions => {
             // associatedTasks is an array of tasks
             var options = associatedOptions;
-            ret.push({ question: question.title, options: options, voted_id: voted_id })
+            ret.push({ question: question, options: options, voted_id: voted_id })
           });
         });
       });
