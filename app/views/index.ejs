@@ -5,16 +5,6 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>質問一覧</h1>
-    <% for (var elm of ret){ %>
-      <h3><%= elm.question %></h3>
-      <% for (var option of elm.options){ %>
-        <% if (option.id == elm.voted_id) { %>
-          <li><b><%= option.name %></b> (you voted)</li>
-        <% } else { %>
-          <li><%= option.name %></li>
-        <% } %>
-      <% } %>
-    <% } %>
+    <h1><%= text %></h1>
   </body>
 </html>
