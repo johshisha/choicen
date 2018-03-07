@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
         if (ret.length == all_length) {
           clearInterval(counter);
           // res.send({"ret": ret});
-          res.render("questions/index", { ret: ret });
+          res.render("questions/index", { ret: ret, user_id: user_id });
         }
       }, 100)
     }).catch(function(reason) {

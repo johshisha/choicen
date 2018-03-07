@@ -9,14 +9,17 @@
       <h1>質問一覧</h1>
       <% for (var elm of ret){ %>
         <h3><%= elm.question.title %></h3>
-        <form>
+        <form action="/votes/create_or_update" method="post">
+          <input type="hidden" name="user_id" value="<%= user_id %>">
+          <input type="hidden" name="question_id" value="<%= elm.question.id %>">
           <% for (var option of elm.options){ %>
             <% if (option.id == elm.voted_id) { %>
-              <label><input type="radio" name="<%= elm.question.id %>" value="<%= option.id %>"  checked><b><%= option.name %></b></input></label><br>
+              <label><input type="radio" name="option_id" value="<%= option.id %>"  checked><b><%= option.name %></b></input></label><br>
             <% } else { %>
-              <label><input type="radio" name="<%= elm.question.id %>" value="<%= option.id %>"><%= option.name %></input></label><br>
+              <label><input type="radio" name="option_id" value="<%= option.id %>"><%= option.name %></input></label><br>
             <% } %>
           <% } %>
+          <input type="submit" value="submit">
         </form>
       <% } %>
     </div>
