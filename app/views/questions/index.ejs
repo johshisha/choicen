@@ -14,12 +14,11 @@
           <input type="hidden" name="question_id" value="<%= elm.question.id %>">
           <% for (var option of elm.options){ %>
             <% if (option.id == elm.voted_id) { %>
-              <label><input type="radio" name="option_id" value="<%= option.id %>"  checked><b><%= option.name %></b></input></label><br>
+              <label><input type="radio" name="option_id" value="<%= option.id %>" onchange="this.form.submit();" checked><b><%= option.name %></b></input></label><br>
             <% } else { %>
-              <label><input type="radio" name="option_id" value="<%= option.id %>"><%= option.name %></input></label><br>
+              <label><input type="radio" name="option_id" value="<%= option.id %>" onchange="this.form.submit();"><%= option.name %></input></label><br>
             <% } %>
           <% } %>
-          <input type="submit" value="submit">
         </form>
       <% } %>
     </div>
