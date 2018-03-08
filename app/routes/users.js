@@ -4,7 +4,9 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  models.User.all().then(users => {
+    res.render('users/index', {users: users});
+  });
 });
 
 // new
