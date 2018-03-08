@@ -6,20 +6,25 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   var user_id = req.query.user_id || 1;
   models.User.findById(user_id).then(user => {
-    var ret = []
+    var ret = [];
     models.Question.all().then(questions => {
       var all_length = questions.length;
       questions.forEach(question => {
         models.Vote.findOne({ where: {userId: user.id, questionId: question.id} }).then(vote => {
-          var voted_id = vote ? vote.optionId : undefined
+          var voted_id = vote ? vote.optionId : undefined;
           question.getOptions().then(associatedOptions => {
             // associatedTasks is an array of tasks
-            var options = associatedOptions;
-            ret.push({ question: question, options: options, voted_id: voted_id })
+            var options = [];
+            associatedOptions.forEach(option => {
+              models.Vote.count({where: {questionId: question.id, optionId: option.id} }).then(count => {
+                options.push({ body: option, votes: count});
+              });
+            });
+            ret.push({ question: question, options: options, voted_id: voted_id });
           });
         });
       });
-      console.log(ret.length)
+      console.log(ret.length);
       var counter = setInterval(() => {
         if (ret.length == all_length) {
           clearInterval(counter);
