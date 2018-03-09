@@ -13,10 +13,10 @@
           <input type="hidden" name="user_id" value="<%= user_id %>">
           <input type="hidden" name="question_id" value="<%= elm.question.id %>">
           <% for (var option of elm.options){ %>
-            <% if (option.id == elm.voted_id) { %>
-              <label><input type="radio" name="option_id" value="<%= option.id %>" onchange="this.form.submit();" checked><b><%= option.name %></b></input></label><br>
+            <% if (option.body.id == elm.voted_id) { %>
+              <label><input type="radio" name="option_id" value="<%= option.body.id %>" onchange="this.form.submit();" checked><b><%= option.body.name %></b></input><span>(<%= option.votes %>)</span></label><br>
             <% } else { %>
-              <label><input type="radio" name="option_id" value="<%= option.id %>" onchange="this.form.submit();"><%= option.name %></input></label><br>
+              <label><input type="radio" name="option_id" value="<%= option.body.id %>" onchange="this.form.submit();"><%= option.body.name %></input><span>(<%= option.votes %>)</span></label><br>
             <% } %>
           <% } %>
         </form>
