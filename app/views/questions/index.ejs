@@ -2,26 +2,82 @@
 <html>
   <head>
     <title>Welcome to Choicen</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/questions.css' />
   </head>
   <body>
-    <div class="question-list">
-      <h1>質問一覧</h1>
-      <% for (var elm of ret){ %>
-        <h3><%= elm.question.title %></h3>
-        <form action="/votes/create_or_update" method="post">
-          <input type="hidden" name="user_id" value="<%= user_id %>">
-          <input type="hidden" name="question_id" value="<%= elm.question.id %>">
-          <% for (var option of elm.options){ %>
-            <% if (option.id == elm.voted_id) { %>
-              <label><input type="radio" name="option_id" value="<%= option.id %>" onchange="this.form.submit();" checked><b><%= option.name %></b></input></label><br>
-            <% } else { %>
-              <label><input type="radio" name="option_id" value="<%= option.id %>" onchange="this.form.submit();"><%= option.name %></input></label><br>
-            <% } %>
-          <% } %>
+
+  <!-- header -->
+  <header>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark amber scrolling-navbar">
+      <a class="navbar-brand" href="#"><strong>Choicen</strong></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">ホーム <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/questions">質問一覧</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">アカウント</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+              <a class="nav-link" href="#">ログイン</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">新規登録</a>
+          </li>
+        </ul>
+        <form class="form-inline">
+          <div class="md-form mt-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="質問検索" aria-label="Search">
+          </div>
         </form>
+      </div>
+    </nav>
+  </header>
+
+  <!-- wrapper -->
+  <div class="wrapper">
+
+    <h1>質問一覧</h1>
+    <div class="d-flex flex-wrap justify-content-center align-content-start">
+      <% for (var elm of ret){ %>
+        <div class="card question-card">
+          <div class="question">
+            <h4>Q. <%= elm.question.title %></h4>
+          </div>
+          <div class="options">
+            <form id="#form_<%= elm.question.id %>" action="/votes/create_or_update" method="post">
+              <input type="hidden" name="user_id" value="<%= user_id %>" form="#form_<%= elm.question.id %>">
+              <input type="hidden" name="question_id" value="<%= elm.question.id %>" form="#form_<%= elm.question.id %>">
+              <% for (var option of elm.options){ %>
+                <div class="form-check mb-4">
+                  <% if (option.id == elm.voted_id) { %>
+                  <input name="group" type="radio" name="option_id" value="<%= option.id %>" class="form-check-input with-gap" id="radioWithGap<%= option.id %>" checked="checked" onchange="this.form.submit();" form="#form_<%= elm.question.id %>">
+                  <% } else { %>
+                  <input name="group" type="radio" name="option_id" value="<%= option.id %>" class="form-check-input with-gap" id="radioWithGap<%= option.id %>" onchange="this.form.submit();" form="#form_<%= elm.question.id %>">
+                  <% } %>
+                  <label class="form-check-label" for="#radioWithGap<%= option.id %>"><%= option.name %></label>
+                </div>
+              <% } %>
+            </form>
+          </div>
+        </div>
       <% } %>
     </div>
+
     <hr>
     <div class="question-form">
       <form action="/questions/create" method="post">
@@ -33,5 +89,13 @@
         <input type="submit" value="submit">
       </form>
     </div>
+
+  </div>
+
+  <!-- script -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script>
   </body>
 </html>
