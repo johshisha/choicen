@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to Choicen</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="user-list">
+      <h1>ユーザ一覧</h1>
+      <table>
+        <tr>
+          <th>UserId</th>
+          <th>Name</th>
+          <th></th>
+        </tr>
+        <% for (var user of users){ %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.name %></td>
+            <td><a href="/questions?user_id=<%= user.id %>">Login!!!</a></td>
+          </tr>
+        <% } %>
+      </table>
+    </div>
+  </body>
+</html>
